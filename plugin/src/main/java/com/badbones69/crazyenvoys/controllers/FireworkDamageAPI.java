@@ -1,37 +1,51 @@
 package com.badbones69.crazyenvoys.controllers;
 
-import com.badbones69.crazyenvoys.api.CrazyManager;
 import com.badbones69.crazyenvoys.multisupport.ServerProtocol;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Firework;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FireworkExplodeEvent;
-import org.bukkit.metadata.FixedMetadataValue;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class FireworkDamageAPI implements Listener {
-
-    public static CrazyManager crazyManager = CrazyManager.getInstance();
-
+    
+    private static final List<Entity> fireworks = new ArrayList<>();
+    
+    /**
+     * @return All the active fireworks.
+     */
+    public static List<Entity> getFireworks() {
+        return fireworks;
+    }
+    
     /**
      * @param firework The firework you want to add.
      */
     public static void addFirework(Entity firework) {
-        if (ServerProtocol.isNewer(ServerProtocol.v1_10_R1)) firework.setMetadata("nodamage", new FixedMetadataValue(crazyManager.getPlugin(), true));
+        if (ServerProtocol.isNewer(ServerProtocol.v1_10_R1)) fireworks.add(firework);
     }
-
-    // Ryder Start
+    
+    /**
+     * @param firework The firework you are removing.
+     */
+    public static void removeFirework(Entity firework) {
+        fireworks.remove(firework);
+    }
+    
     @EventHandler
-    public void onPlayerDamage(EntityDamageByEntityEvent e) {
-        if (e.getDamager() instanceof Firework) {
-            Firework fw = (Firework) e.getDamager();
-            if (fw.hasMetadata("nodamage")) e.setCancelled(true);
+    public void onPlayerDamage(EntityDamageEvent e) {
+        for (Entity en : e.getEntity().getNearbyEntities(5, 5, 5)) {
+            if (getFireworks().contains(en)) e.setCancelled(true);
         }
     }
-    // Ryder End
+    
+    @EventHandler
+    public void onFireworkExplode(FireworkExplodeEvent e) {
+        final Entity firework = e.getEntity();
+
+        if (getFireworks().contains(firework)) removeFirework(firework);
+    }
+    
 }
