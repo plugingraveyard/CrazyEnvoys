@@ -47,5 +47,4 @@ public class FireworkDamageAPI implements Listener {
 
         if (getFireworks().contains(firework)) removeFirework(firework);
     }
-    
 }
