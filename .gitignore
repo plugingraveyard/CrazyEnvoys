@@ -1,19 +1,12 @@
+.gradle
+.idea
 
-*.iml
+build
 
-\.idea/
-
-target/
-
-src/main/lib/
-
-src/main/java/META-INF/
-
-src/\.DS_Store
-
-\.DS_Store
-
-plugin/src/main/lib/
-
-plugin/dependency-reduced-pom\.xml
-*.jar
+api/build
+plugin/build
+v1_8_R3/build
+v1_12_R1/build
+v1_16_R3/build
+v1_17_R1/build
+v1_18_R2/build
