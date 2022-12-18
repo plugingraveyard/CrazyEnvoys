@@ -5,8 +5,5 @@ build
 
 api/build
 plugin/build
-v1_8_R3/build
-v1_12_R1/build
-v1_16_R3/build
-v1_17_R1/build
-v1_18_R2/build
+worldguard-v6/build
+worldguard-v7/build
