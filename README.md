@@ -1,41 +1,26 @@
-## Crazy Envoys
+# Crazy Envoys
+The legacy source for CrazyEnvoys ( 1.8 -> 1.18.2 )
 
-[![Join us on Discord](https://img.shields.io/discord/182615261403283459.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.badbones69.com)
+## Jenkins:
+https://ci.crazycrew.us/view/Legacy/job/CrazyEnvoys-Legacy/
 
-[![CrazyEnvoy's Stargazers](https://img.shields.io/github/stars/Crazy-Crew/Crazy-Envoys?label=stars&logo=github)](https://github.com/Crazy-Crew/Crazy-Envoys/stargazers)
-[![CrazyEnvoy's Forks](https://img.shields.io/github/forks/Crazy-Crew/Crazy-Envoys?label=forks&logo=github)](https://github.com/Crazy-Crew/Crazy-Envoys/network/members)
-[![CrazyEnvoy's Watchers](https://img.shields.io/github/watchers/Crazy-Crew/Crazy-Envoys?label=watchers&logo=github)](https://github.com/Crazy-Crew/Crazy-Envoys/watchers)
+### Build Status:
+[![Build Status](https://ci.crazycrew.us/view/Legacy/job/CrazyEnvoys-Legacy/badge/icon)](https://ci.crazycrew.us/view/Legacy/job/CrazyEnvoys-Legacy/)
 
-CrazyEnvoys is a plugin that drops custom crates with any prize you want all over spawn for players to fight over.
+## Repo:
+https://repo.crazycrew.us/#/legacy
 
-## Contact
-[![Join us on Discord](https://img.shields.io/discord/182615261403283459.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.badbones69.com)
+## Maven:
+```xml
+<repository>
+    <id>crazycrew-legacy</id>
+    <url>https://repo.crazycrew.us/legacy</url>
+</repository>
 
-Join us on [Discord](https://discord.badbones69.com)
-
-## Downloads
-[![Build Status](https://jenkins.badbones69.com/view/Stable/job/Crazy-Envoys/badge/icon)](https://jenkins.badbones69.com/view/Stable/job/Crazy-Envoys/)
-
-Downloads can be obtained from the [spigot page](https://www.spigotmc.org/resources/crazy-envoys.32870/) or the [Jenkins](https://jenkins.badbones69.com/view/Stable/job/Crazy-Envoys/).
-
-## Plugin Data
-[![bStats Graph Data](https://bstats.org/signatures/bukkit/CrazyEnvoy.svg)](https://bstats.org/plugin/bukkit/CrazyEnvoy/4537)
-
-## API
-In Progress.
-
-### Dependency Information
-
-#### Maven
-In Progress.
-
-#### Gradle
-In Progress.
-
-## Working with CrazyEnvoys.
-
-#### Contributing
-Fork the project & open a pull request.
-
-#### Compiling
-Clone the project & run the install task.
+<dependency>
+    <groupId>com.badbones69</groupId>
+    <artifactId>crazyenvoys-plugin</artifactId>
+    <version>1.4.17</version>
+    <scope>provided</scope>
+</dependency>
+```
