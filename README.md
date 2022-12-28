@@ -7,7 +7,7 @@ https://ci.crazycrew.us/view/Legacy/job/CrazyEnvoys-Legacy/
 ### Build Status:
 [![Build Status](https://ci.crazycrew.us/view/Legacy/job/CrazyEnvoys-Legacy/badge/icon)](https://ci.crazycrew.us/view/Legacy/job/CrazyEnvoys-Legacy/)
 
-## Repo:
+## Repository:
 https://repo.crazycrew.us/#/legacy
 
 ## Maven:
