@@ -2,7 +2,8 @@
 The legacy source for CrazyEnvoys ( 1.8 -> 1.16.5 )
 
 ## Modrinth:
-https://modrinth.com/plugin/crazyenvoys/version/1.4.17
+All versions labeled "Alpha" are legacy versions.
+https://modrinth.com/plugin/crazyenvoys/versions/
 
 ## Repository:
 https://repo.crazycrew.us/#/releases
@@ -25,7 +26,7 @@ repositories {
 
 ```gradle
 dependencies {
-    compileOnly "me.badbones69.crazyenvoys:crazyenvoys:1.4.17"
+    compileOnly "me.badbones69.crazyenvoys:crazyenvoys:1.4.17.1"
 }
 ```
 </details>
@@ -44,7 +45,7 @@ repositories {
 
 ```gradle
 dependencies {
-    compileOnly("me.badbones69.crazyenvoys", "crazyenvoys", "1.4.17")
+    compileOnly("me.badbones69.crazyenvoys", "crazyenvoys", "1.4.17.1")
 }
 ```
 </details>
@@ -66,7 +67,7 @@ dependencies {
 <dependency>
   <groupId>me.badbones69.crazyenvoys</groupId>
   <artifactId>crazyenvoys</artifactId>
-  <version>1.4.17</version>
+  <version>1.4.17.1</version>
  </dependency>
 ```
 </details>
