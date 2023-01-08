@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class FileManager {
     
-    private static final FileManager instance = new FileManager();
     private boolean log = false;
     private final HashMap<Files, File> files = new HashMap<>();
     private final ArrayList<String> homeFolders = new ArrayList<>();
@@ -30,17 +29,13 @@ public class FileManager {
     private final HashMap<String, String> jarHomeFolders = new HashMap<>();
     private final HashMap<String, String> autoGenerateFiles = new HashMap<>();
     private final HashMap<Files, FileConfiguration> configurations = new HashMap<>();
-    
-    public static FileManager getInstance() {
-        return instance;
-    }
 
-    public static final CrazyManager crazyManager = CrazyManager.getInstance();
+    private final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
     
     /**
      * Sets up the plugin and loads all necessary files.
      */
-    public void setup(CrazyEnvoys plugin) {
+    public void setup() {
         if (!plugin.getDataFolder().exists()) plugin.getDataFolder().mkdirs();
 
         files.clear();
@@ -94,7 +89,7 @@ public class FileManager {
                     if (list != null) {
                         for (String name : list) {
                             if (name.endsWith(".yml")) {
-                                CustomFile file = new CustomFile(name, homeFolder, plugin);
+                                CustomFile file = new CustomFile(name, homeFolder);
 
                                 if (file.exists()) {
                                     customFiles.add(file);
@@ -119,7 +114,7 @@ public class FileManager {
                                 copyFile(jarFile, serverFile);
 
                                 if (fileName.toLowerCase().endsWith(".yml")) {
-                                    customFiles.add(new CustomFile(fileName, homeFolder, plugin));
+                                    customFiles.add(new CustomFile(fileName, homeFolder));
                                 }
 
                                 if (log) plugin.getLogger().info("Created new default file: " + homeFolder + "/" + fileName + ".");
@@ -249,7 +244,7 @@ public class FileManager {
         try {
             configurations.get(file).save(files.get(file));
         } catch (IOException e) {
-            crazyManager.getPlugin().getLogger().info("Could not save " + file.getFileName() + "!");
+            plugin.getLogger().info("Could not save " + file.getFileName() + "!");
             e.printStackTrace();
         }
     }
@@ -263,14 +258,14 @@ public class FileManager {
         CustomFile file = getFile(name);
         if (file != null) {
             try {
-                file.getFile().save(new File(crazyManager.getPlugin().getDataFolder(), file.getHomeFolder() + "/" + file.getFileName()));
-                if (log) crazyManager.getPlugin().getLogger().info("Successfully saved the " + file.getFileName() + ".");
+                file.getFile().save(new File(plugin.getDataFolder(), file.getHomeFolder() + "/" + file.getFileName()));
+                if (log) plugin.getLogger().info("Successfully saved the " + file.getFileName() + ".");
             } catch (Exception e) {
-                crazyManager.getPlugin().getLogger().info("Could not save " + file.getFileName() + "!");
+                plugin.getLogger().info("Could not save " + file.getFileName() + "!");
                 e.printStackTrace();
             }
         } else {
-            if (log) crazyManager.getPlugin().getLogger().info("The file " + name + ".yml could not be found!");
+            if (log) plugin.getLogger().info("The file " + name + ".yml could not be found!");
         }
     }
     
@@ -299,14 +294,14 @@ public class FileManager {
 
         if (file != null) {
             try {
-                file.file = YamlConfiguration.loadConfiguration(new File(crazyManager.getPlugin().getDataFolder(), "/" + file.getHomeFolder() + "/" + file.getFileName()));
-                if (log) crazyManager.getPlugin().getLogger().info("Successfully reloaded the " + file.getFileName() + ".");
+                file.file = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "/" + file.getHomeFolder() + "/" + file.getFileName()));
+                if (log) plugin.getLogger().info("Successfully reloaded the " + file.getFileName() + ".");
             } catch (Exception e) {
-                crazyManager.getPlugin().getLogger().info("Could not reload the " + file.getFileName() + "!");
+                plugin.getLogger().info("Could not reload the " + file.getFileName() + "!");
                 e.printStackTrace();
             }
         } else {
-            if (log) crazyManager.getPlugin().getLogger().info("The file " + name + ".yml could not be found!");
+            if (log) plugin.getLogger().info("The file " + name + ".yml could not be found!");
         }
     }
     
@@ -346,7 +341,12 @@ public class FileManager {
         
         private final String fileName;
         private final String fileLocation;
-        
+
+
+        private final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
+
+        private final FileManager fileManager = plugin.getFileManager();
+
         /**
          * The files that the server will try and load.
          *
@@ -382,21 +382,21 @@ public class FileManager {
          * @return The file from the system.
          */
         public FileConfiguration getFile() {
-            return getInstance().getFile(this);
+            return fileManager.getFile(this);
         }
         
         /**
          * Saves the file from the loaded state to the file system.
          */
         public void saveFile() {
-            getInstance().saveFile(this);
+            fileManager.saveFile(this);
         }
         
         /**
          * Overrides the loaded state file and loads the file systems file.
          */
         public void reloadFile() {
-            getInstance().reloadFile(this);
+           fileManager.reloadFile(this);
         }
     }
     
@@ -404,7 +404,6 @@ public class FileManager {
         
         private final String name;
         private final String fileName;
-        private final CrazyEnvoys plugin;
         private final String homeFolder;
         private FileConfiguration file;
         
@@ -414,10 +413,9 @@ public class FileManager {
          * @param name Name of the file.
          * @param homeFolder The home folder of the file.
          */
-        public CustomFile(String name, String homeFolder, CrazyEnvoys plugin) {
+        public CustomFile(String name, String homeFolder) {
             this.name = name.replace(".yml", "");
             this.fileName = name;
-            this.plugin = plugin;
             this.homeFolder = homeFolder;
 
             if (new File(plugin.getDataFolder(), "/" + homeFolder).exists()) {
@@ -513,7 +511,7 @@ public class FileManager {
         public boolean reloadFile() {
             if (file != null) {
                 try {
-                    file = YamlConfiguration.loadConfiguration(new File(crazyManager.getPlugin().getDataFolder(), "/" + homeFolder + "/" + fileName));
+                    file = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "/" + homeFolder + "/" + fileName));
 
                     if (log) plugin.getLogger().info("Successfully reloaded the " + fileName + ".");
 
@@ -529,5 +527,4 @@ public class FileManager {
             return false;
         }
     }
-    
 }

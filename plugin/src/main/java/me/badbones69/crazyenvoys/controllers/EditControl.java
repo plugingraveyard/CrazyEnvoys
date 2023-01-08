@@ -1,5 +1,6 @@
 package me.badbones69.crazyenvoys.controllers;
 
+import me.badbones69.crazyenvoys.CrazyEnvoys;
 import me.badbones69.crazyenvoys.Methods;
 import me.badbones69.crazyenvoys.api.CrazyManager;
 import me.badbones69.crazyenvoys.api.enums.Messages;
@@ -17,7 +18,8 @@ import java.util.List;
 public class EditControl implements Listener {
     
     private static final ArrayList<Player> editors = new ArrayList<>();
-    private static final CrazyManager crazyManager = CrazyManager.getInstance();
+    private final static CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
+    private final static CrazyManager crazyManager = plugin.getCrazyManager();
     
     public static List<Player> getEditors() {
         return editors;

@@ -1,5 +1,6 @@
 package me.badbones69.crazyenvoys.commands;
 
+import me.badbones69.crazyenvoys.CrazyEnvoys;
 import me.badbones69.crazyenvoys.api.CrazyManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnvoyTab implements TabCompleter {
-    
-    private final CrazyManager crazyManager = CrazyManager.getInstance();
+
+    private final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
+    private final CrazyManager crazyManager = plugin.getCrazyManager();
     
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String commandLabel, String[] args) {
@@ -51,7 +53,7 @@ public class EnvoyTab implements TabCompleter {
             return StringUtil.copyPartialMatches(args[1], completions, new ArrayList<>());
         } else if (args.length == 3) { // /envoy arg0 arg1
             if ("flare".equalsIgnoreCase(args[0])) {
-                if (hasPermission(sender, "flare.give")) crazyManager.getPlugin().getServer().getOnlinePlayers().forEach(player -> completions.add(player.getName()));
+                if (hasPermission(sender, "flare.give")) plugin.getServer().getOnlinePlayers().forEach(player -> completions.add(player.getName()));
             }
 
             return StringUtil.copyPartialMatches(args[2], completions, new ArrayList<>());
@@ -63,5 +65,4 @@ public class EnvoyTab implements TabCompleter {
     private boolean hasPermission(CommandSender sender, String node) {
         return sender.hasPermission("envoy." + node) || sender.hasPermission("envoy.bypass");
     }
-    
 }

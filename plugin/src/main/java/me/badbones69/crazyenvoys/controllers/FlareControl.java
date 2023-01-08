@@ -1,5 +1,6 @@
 package me.badbones69.crazyenvoys.controllers;
 
+import me.badbones69.crazyenvoys.CrazyEnvoys;
 import me.badbones69.crazyenvoys.Methods;
 import me.badbones69.crazyenvoys.api.CrazyManager;
 import me.badbones69.crazyenvoys.api.enums.Messages;
@@ -16,8 +17,9 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 
 public class FlareControl implements Listener {
-    
-    private final CrazyManager crazyManager = CrazyManager.getInstance();
+
+    private final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
+    private final CrazyManager crazyManager = plugin.getCrazyManager();
     private final EnvoySettings envoySettings = EnvoySettings.getInstance();
     
     @EventHandler
@@ -34,7 +36,7 @@ public class FlareControl implements Listener {
                     if (crazyManager.isEnvoyActive()) {
                         Messages.ALREADY_STARTED.sendMessage(player);
                     } else {
-                        int online = crazyManager.getPlugin().getServer().getOnlinePlayers().size();
+                        int online = plugin.getServer().getOnlinePlayers().size();
 
                         if (envoySettings.isMinPlayersEnabled() && envoySettings.isMinFlareEnabled() && online < envoySettings.getMinPlayers()) {
                             HashMap<String, String> placeholder = new HashMap<>();
@@ -66,7 +68,7 @@ public class FlareControl implements Listener {
                         }
 
                         EnvoyStartEvent event = new EnvoyStartEvent(EnvoyStartEvent.EnvoyStartReason.FLARE);
-                        crazyManager.getPlugin().getServer().getPluginManager().callEvent(event);
+                        plugin.getServer().getPluginManager().callEvent(event);
 
                         if (!event.isCancelled() && crazyManager.startEnvoyEvent()) {
                             Messages.USED_FLARE.sendMessage(player);

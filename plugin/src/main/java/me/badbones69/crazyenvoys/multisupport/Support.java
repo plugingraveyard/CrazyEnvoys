@@ -1,5 +1,6 @@
 package me.badbones69.crazyenvoys.multisupport;
 
+import me.badbones69.crazyenvoys.CrazyEnvoys;
 import me.badbones69.crazyenvoys.api.CrazyManager;
 
 public enum Support {
@@ -14,7 +15,7 @@ public enum Support {
     
     private final String name;
 
-    private final CrazyManager crazyManager = CrazyManager.getInstance();
+    private final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
     
     Support(String name) {
         this.name = name;
@@ -25,8 +26,8 @@ public enum Support {
     }
     
     public boolean isPluginLoaded() {
-        if (crazyManager.getPlugin().getServer().getPluginManager().getPlugin(name) != null) {
-            return crazyManager.getPlugin().isEnabled();
+        if (plugin.getServer().getPluginManager().getPlugin(name) != null) {
+            return plugin.isEnabled();
         }
 
         return false;

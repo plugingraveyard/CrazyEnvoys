@@ -1,6 +1,7 @@
 package me.badbones69.crazyenvoys;
 
 import me.badbones69.crazyenvoys.api.CrazyManager;
+import me.badbones69.crazyenvoys.api.FileManager;
 import me.badbones69.crazyenvoys.api.FileManager.Files;
 import me.badbones69.crazyenvoys.api.enums.Messages;
 import me.badbones69.crazyenvoys.controllers.FireworkDamageAPI;
@@ -25,7 +26,7 @@ public class Methods {
     
     public final static Pattern HEX_PATTERN = Pattern.compile("#[a-fA-F0-9]{6}");
 
-    private final static CrazyManager crazyManager = CrazyManager.getInstance();
+    private static final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
     
     public static String color(String message) {
         if (ServerProtocol.isNewer(ServerProtocol.v1_15_R1)) {
@@ -74,7 +75,7 @@ public class Methods {
     }
     
     public static boolean isOnline(String name) {
-        for (Player player : crazyManager.getPlugin().getServer().getOnlinePlayers()) {
+        for (Player player : plugin.getServer().getOnlinePlayers()) {
             if (player.getName().equalsIgnoreCase(name)) {
                 return true;
             }
@@ -84,7 +85,7 @@ public class Methods {
     }
     
     public static Player getPlayer(String name) {
-        return crazyManager.getPlugin().getServer().getPlayer(name);
+        return plugin.getServer().getPlayer(name);
     }
     
     public static boolean isInvFull(Player player) {
@@ -104,7 +105,7 @@ public class Methods {
     }
     
     private static void detonate(final Firework f) {
-        crazyManager.getPlugin().getServer().getScheduler().scheduleSyncDelayedTask(crazyManager.getPlugin(), f :: detonate, 2);
+        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, f :: detonate, 2);
     }
     
     public static Color getColor(String color) {

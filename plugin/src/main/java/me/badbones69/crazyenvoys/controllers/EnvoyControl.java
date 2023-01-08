@@ -1,5 +1,6 @@
 package me.badbones69.crazyenvoys.controllers;
 
+import me.badbones69.crazyenvoys.CrazyEnvoys;
 import me.badbones69.crazyenvoys.Methods;
 import me.badbones69.crazyenvoys.api.CrazyManager;
 import me.badbones69.crazyenvoys.api.enums.Messages;
@@ -30,7 +31,8 @@ import java.util.UUID;
 public class EnvoyControl implements Listener {
     
     private static final HashMap<UUID, Calendar> cooldown = new HashMap<>();
-    private final CrazyManager crazyManager = CrazyManager.getInstance();
+    private final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
+    private final CrazyManager crazyManager = plugin.getCrazyManager();
     private final EnvoySettings envoySettings = EnvoySettings.getInstance();
     private final Random random = new Random();
     
@@ -80,7 +82,7 @@ public class EnvoyControl implements Listener {
 
                 List<Prize> prizes = tier.getUseChance() ? pickPrizesByChance(tier) : pickRandomPrizes(tier);
                 OpenEnvoyEvent openEnvoyEvent = new OpenEnvoyEvent(player, block, tier, prizes);
-                crazyManager.getPlugin().getServer().getPluginManager().callEvent(openEnvoyEvent);
+                plugin.getServer().getPluginManager().callEvent(openEnvoyEvent);
 
                 if (!openEnvoyEvent.isCancelled()) {
                     if (tier.getFireworkToggle()) {
@@ -102,7 +104,7 @@ public class EnvoyControl implements Listener {
                     crazyManager.removeActiveEnvoy(block);
 
                     if (tier.getPrizes().isEmpty()) {
-                        crazyManager.getPlugin().getServer().broadcastMessage(Methods.getPrefix() + Methods.color("&cNo prizes were found in the " + tier + " tier." + " Please add prizes other wise errors will occur."));
+                        plugin.getServer().broadcastMessage(Methods.getPrefix() + Methods.color("&cNo prizes were found in the " + tier + " tier." + " Please add prizes other wise errors will occur."));
                         return;
                     }
 
@@ -112,7 +114,7 @@ public class EnvoyControl implements Listener {
                         }
 
                         for (String cmd : prize.getCommands()) {
-                            crazyManager.getPlugin().getServer().dispatchCommand(crazyManager.getPlugin().getServer().getConsoleSender(), cmd.replace("%Player%", player.getName()).replace("%player%", player.getName()));
+                            plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), cmd.replace("%Player%", player.getName()).replace("%player%", player.getName()));
                         }
 
                         for (ItemStack item : prize.getItems()) {
@@ -137,7 +139,7 @@ public class EnvoyControl implements Listener {
                         }
                     } else {
                         EnvoyEndEvent event = new EnvoyEndEvent(EnvoyEndEvent.EnvoyEndReason.ALL_CRATES_COLLECTED);
-                        crazyManager.getPlugin().getServer().getPluginManager().callEvent(event);
+                        plugin.getServer().getPluginManager().callEvent(event);
                         crazyManager.endEnvoyEvent();
                         Messages.ENDED.broadcastMessage(false);
                     }

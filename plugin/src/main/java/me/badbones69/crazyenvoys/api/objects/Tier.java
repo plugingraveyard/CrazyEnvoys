@@ -1,5 +1,6 @@
 package me.badbones69.crazyenvoys.api.objects;
 
+import me.badbones69.crazyenvoys.CrazyEnvoys;
 import me.badbones69.crazyenvoys.Methods;
 import me.badbones69.crazyenvoys.api.FileManager;
 import me.badbones69.crazyenvoys.api.FileManager.CustomFile;
@@ -10,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Tier {
+
+    private final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
 
     private final String name;
     private final CustomFile file;
@@ -42,7 +45,8 @@ public class Tier {
      */
     public Tier(String name) {
         this.name = name;
-        file = FileManager.getInstance().getFile(name);
+        FileManager fileManager = plugin.getFileManager();
+        file = fileManager.getFile(name);
         claimPermission = "";
         claimPermissionToggle = false;
         spawnChance = 100;

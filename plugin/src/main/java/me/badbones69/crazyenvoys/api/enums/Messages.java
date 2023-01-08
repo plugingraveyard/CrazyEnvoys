@@ -1,7 +1,9 @@
 package me.badbones69.crazyenvoys.api.enums;
 
+import me.badbones69.crazyenvoys.CrazyEnvoys;
 import me.badbones69.crazyenvoys.Methods;
 import me.badbones69.crazyenvoys.api.CrazyManager;
+import me.badbones69.crazyenvoys.api.FileManager;
 import me.badbones69.crazyenvoys.api.FileManager.Files;
 import me.badbones69.crazyenvoys.api.objects.EnvoySettings;
 import org.bukkit.command.CommandSender;
@@ -76,7 +78,8 @@ public enum Messages {
     private final String path;
     private String defaultMessage;
     private List<String> defaultListMessage;
-    private final CrazyManager crazyManager = CrazyManager.getInstance();
+    private final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
+    private final CrazyManager crazyManager = plugin.getCrazyManager();
     private final EnvoySettings envoySettings = EnvoySettings.getInstance();
     
     Messages(String path, String defaultMessage) {
@@ -205,7 +208,7 @@ public enum Messages {
     
     public void broadcastMessage(boolean ignore, Map<String, String> placeholder) {
         if (envoySettings.isWorldMessagesEnabled()) {
-            for (Player player : crazyManager.getPlugin().getServer().getOnlinePlayers()) {
+            for (Player player : plugin.getServer().getOnlinePlayers()) {
                 for (String world : envoySettings.getWorldMessagesWorlds()) {
                     if (player.getWorld().getName().equalsIgnoreCase(world)) {
                         if (ignore) {
@@ -217,7 +220,7 @@ public enum Messages {
                 }
             }
         } else {
-            for (Player player : crazyManager.getPlugin().getServer().getOnlinePlayers()) {
+            for (Player player : plugin.getServer().getOnlinePlayers()) {
                 if (ignore) {
                     if (!crazyManager.isIgnoringMessages(player.getUniqueId())) {
                         sendMessage(player, placeholder);
@@ -228,7 +231,7 @@ public enum Messages {
             }
         }
 
-        crazyManager.getPlugin().getServer().getLogger().log(Level.INFO, getMessage(placeholder));
+        plugin.getServer().getLogger().log(Level.INFO, getMessage(placeholder));
     }
     
     private boolean exists() {

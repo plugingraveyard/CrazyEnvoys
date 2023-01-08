@@ -47,14 +47,11 @@ import java.util.Set;
 import java.util.UUID;
 
 public class CrazyManager {
-    
-    public static CrazyManager getInstance() {
-        return instance;
-    }
 
-    private static final CrazyManager instance = new CrazyManager();
+    private final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
     
-    private final FileManager fileManager = FileManager.getInstance();
+    private final FileManager fileManager = plugin.getFileManager();
+
     private final EnvoySettings envoySettings = EnvoySettings.getInstance();
     private BukkitTask runTimeTask;
     private BukkitTask coolDownTask;
@@ -77,23 +74,6 @@ public class CrazyManager {
     private final List<Tier> tiers = new ArrayList<>();
     private final List<Tier> cachedChances = new ArrayList<>();
     private final Random random = new Random();
-
-    /**
-     * The CrazyEnvoys plugin.
-     */
-    private CrazyEnvoys plugin;
-
-    /**
-     * Get the CrazyEnvoys Plugin.
-     * @return The CrazyEnvoys Plugin object.
-     */
-    public CrazyEnvoys getPlugin() {
-        return plugin;
-    }
-
-    public void loadPlugin(CrazyEnvoys plugin) {
-        this.plugin = plugin;
-    }
     
     /**
      * Run this when you need to load the new locations.

@@ -27,20 +27,24 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CrazyEnvoys extends JavaPlugin implements Listener {
-    
-    private final FileManager fileManager = FileManager.getInstance();
-    private final CrazyManager crazyManager = CrazyManager.getInstance();
+
+    private static CrazyEnvoys plugin;
+
+    private FileManager fileManager;
+    private CrazyManager crazyManager;
     
     @Override
     public void onEnable() {
+        plugin = this;
+        fileManager = new FileManager();
+        crazyManager = new CrazyManager();
+
         if (ServerProtocol.isNewer(ServerProtocol.v1_16_R3)) {
             getLogger().warning("This jar only works on 1.16.X & below.");
             getServer().getPluginManager().disablePlugin(this);
 
             return;
         }
-
-        crazyManager.loadPlugin(this);
 
         String homeFolder = ServerProtocol.isNewer(ServerProtocol.v1_12_R1) ? "/tiers1.13-Up" : "/tiers1.12.2-Down";
 
@@ -49,7 +53,7 @@ public class CrazyEnvoys extends JavaPlugin implements Listener {
         .registerDefaultGenerateFiles("Basic.yml", "/tiers", homeFolder)
         .registerDefaultGenerateFiles("Lucky.yml", "/tiers", homeFolder)
         .registerDefaultGenerateFiles("Titan.yml", "/tiers", homeFolder)
-        .setup(this);
+        .setup();
         
         Messages.addMissingMessages();
         
@@ -111,5 +115,17 @@ public class CrazyEnvoys extends JavaPlugin implements Listener {
         }
 
         crazyManager.unload();
+    }
+
+    public static CrazyEnvoys getPlugin() {
+        return plugin;
+    }
+
+    public FileManager getFileManager() {
+        return fileManager;
+    }
+
+    public CrazyManager getCrazyManager() {
+        return crazyManager;
     }
 }
