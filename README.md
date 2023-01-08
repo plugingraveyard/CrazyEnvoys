@@ -1,26 +1,72 @@
 # Crazy Envoys
-The legacy source for CrazyEnvoys ( 1.8 -> 1.18.2 )
+The legacy source for CrazyEnvoys ( 1.8 -> 1.16.5 )
 
-## Jenkins:
-https://ci.crazycrew.us/view/Legacy/job/CrazyEnvoys-Legacy/
-
-### Build Status:
-[![Build Status](https://ci.crazycrew.us/view/Legacy/job/CrazyEnvoys-Legacy/badge/icon)](https://ci.crazycrew.us/view/Legacy/job/CrazyEnvoys-Legacy/)
+## Modrinth:
+https://modrinth.com/plugin/crazyenvoys/version/1.4.17
 
 ## Repository:
-https://repo.crazycrew.us/#/legacy
+https://repo.crazycrew.us/#/releases
 
-## Maven:
+# Developer API
+
+## Groovy
+<details>
+ <summary>
+   Gradle (Groovy)
+ </summary>
+
+```gradle
+repositories {
+    maven {
+        url = "https://repo.crazycrew.us/releases"
+    }
+}
+```
+
+```gradle
+dependencies {
+    compileOnly "me.badbones69.crazyenvoys:crazyenvoys:1.4.17"
+}
+```
+</details>
+
+## Kotlin
+<details>
+ <summary>
+   Gradle (Kotlin)
+ </summary>
+
+```gradle
+repositories {
+    maven("https://repo.crazycrew.us/releases")
+}
+```
+
+```gradle
+dependencies {
+    compileOnly("me.badbones69.crazyenvoys", "crazyenvoys", "1.4.17")
+}
+```
+</details>
+
+## Maven
+<details>
+ <summary>
+   Maven
+ </summary>
+
 ```xml
 <repository>
-    <id>crazycrew-legacy</id>
-    <url>https://repo.crazycrew.us/legacy</url>
+  <id>crazycrew</id>
+  <url>https://repo.crazycrew.us/releases</url>
 </repository>
-
-<dependency>
-    <groupId>com.badbones69</groupId>
-    <artifactId>crazyenvoys-plugin</artifactId>
-    <version>1.4.17</version>
-    <scope>provided</scope>
-</dependency>
 ```
+
+```xml
+<dependency>
+  <groupId>me.badbones69.crazyenvoys</groupId>
+  <artifactId>crazyenvoys</artifactId>
+  <version>1.4.17</version>
+ </dependency>
+```
+</details>
