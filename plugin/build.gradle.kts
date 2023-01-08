@@ -98,7 +98,8 @@ tasks {
                 "name" to rootProject.name,
                 "group" to rootProject.group,
                 "version" to rootProject.version,
-                "description" to rootProject.description
+                "description" to rootProject.description,
+                "website" to "https://modrinth.com/plugin/crazyenvoys"
             )
         }
     }

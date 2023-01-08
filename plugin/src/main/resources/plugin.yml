@@ -3,6 +3,7 @@ main: "${group}.CrazyEnvoys"
 author: BadBones69
 version: ${version}
 api-version: 1.13
+website: ${website}
 
 softdepend: [HolographicDisplays, DecentHolograms, PlaceholderAPI, MVdWPlaceholderAPI, Multiverse-Core, MultiWorld, WorldEdit, WorldGuard]
 description: ${description}
