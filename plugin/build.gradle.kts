@@ -88,7 +88,7 @@ tasks {
                 <h2>Notice:</h2>
                  <p>This is only for Legacy ( 1.8 - 1.16.5 ) Support, No new features will be added.</p>
                 <h2>Bug Fixes:</h2>
-                 <p>Downgraded holographic displays support to 2.4.9 because 3.0.0 is garbage</p>
+                 <p>Fixed why it wasn't booting</p>
             """.trimIndent())
     }
 
