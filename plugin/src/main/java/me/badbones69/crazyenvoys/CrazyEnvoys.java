@@ -16,7 +16,6 @@ import me.badbones69.crazyenvoys.multisupport.MVdWPlaceholderAPISupport;
 import me.badbones69.crazyenvoys.multisupport.PlaceholderAPISupport;
 import me.badbones69.crazyenvoys.multisupport.Support;
 import me.badbones69.crazyenvoys.multisupport.ServerProtocol;
-import me.badbones69.crazyenvoys.multisupport.holograms.HolographicSupport;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
@@ -34,6 +33,12 @@ public class CrazyEnvoys extends JavaPlugin implements Listener {
     
     @Override
     public void onEnable() {
+        if (ServerProtocol.isNewer(ServerProtocol.v1_16_R3)) {
+            getLogger().warning("This jar only works on 1.16.X & below.");
+            getServer().getPluginManager().disablePlugin(this);
+
+            return;
+        }
 
         crazyManager.loadPlugin(this);
 

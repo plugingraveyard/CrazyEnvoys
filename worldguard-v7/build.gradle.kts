@@ -7,10 +7,3 @@ dependencies {
 
     compileOnly("com.sk89q.worldedit", "worldedit-bukkit", "7.0.1-SNAPSHOT")
 }
-
-tasks {
-    compileJava {
-        sourceCompatibility = "8"
-        targetCompatibility = "8"
-    }
-}

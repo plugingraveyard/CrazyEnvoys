@@ -2,8 +2,6 @@ plugins {
     `java-library`
 }
 
-rootProject.group = "me.badbones69.crazyenvoys"
-rootProject.version = "${extra["plugin_version"]}"
 rootProject.description = "Drop custom crates with any prize you want all over spawn for players to fight over."
 
 allprojects {
@@ -23,6 +21,10 @@ allprojects {
          * Everything else we need.
          */
         mavenCentral()
-        mavenLocal()
+    }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
