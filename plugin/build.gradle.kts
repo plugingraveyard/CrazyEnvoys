@@ -35,7 +35,7 @@ dependencies {
 
     compileOnly("org.spigotmc", "spigot-api", "${project.extra["minecraft_version"]}-R0.1-SNAPSHOT")
 
-    compileOnly("me.filoghost.holographicdisplays", "holographicdisplays-api", "3.0.0")
+    compileOnly("com.gmail.filoghost.holographicdisplays", "holographicdisplays-api", "2.4.9")
 
     compileOnly("com.github.decentsoftware-eu", "decentholograms", "2.7.8")
 
@@ -88,7 +88,7 @@ tasks {
                 <h2>Notice:</h2>
                  <p>This is only for Legacy ( 1.8 - 1.16.5 ) Support, No new features will be added.</p>
                 <h2>Bug Fixes:</h2>
-                 <p>N/A</p>
+                 <p>Downgraded holographic displays support to 2.4.9 because 3.0.0 is garbage</p>
             """.trimIndent())
     }
 
