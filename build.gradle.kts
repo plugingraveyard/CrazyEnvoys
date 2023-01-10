@@ -2,8 +2,6 @@ plugins {
     `java-library`
 }
 
-rootProject.description = "Drop custom crates with any prize you want all over spawn for players to fight over."
-
 allprojects {
     apply(plugin = "java-library")
 

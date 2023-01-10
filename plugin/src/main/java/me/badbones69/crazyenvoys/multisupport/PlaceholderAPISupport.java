@@ -34,7 +34,7 @@ public class PlaceholderAPISupport extends PlaceholderExpansion {
     
     @Override
     public String getIdentifier() {
-        return "crazyenvoys";
+        return plugin.getName().toLowerCase();
     }
     
     @Override

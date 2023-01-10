@@ -86,7 +86,7 @@ public class CrazyEnvoys extends JavaPlugin implements Listener {
         } catch (Exception ignored) {}
 
         if (Support.PLACEHOLDER_API.isPluginLoaded()) new PlaceholderAPISupport().register();
-        if (Support.MVDW_PLACEHOLDER_API.isPluginLoaded()) MVdWPlaceholderAPISupport.registerPlaceholders(this);
+        if (Support.MVDW_PLACEHOLDER_API.isPluginLoaded()) MVdWPlaceholderAPISupport.registerPlaceholders();
 
         registerCommand(getCommand("crazyenvoys"), new EnvoyTab(), new EnvoyCommand());
     }

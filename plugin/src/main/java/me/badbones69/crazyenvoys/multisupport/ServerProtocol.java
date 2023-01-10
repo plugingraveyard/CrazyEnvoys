@@ -1,7 +1,6 @@
 package me.badbones69.crazyenvoys.multisupport;
 
 import me.badbones69.crazyenvoys.CrazyEnvoys;
-import me.badbones69.crazyenvoys.api.CrazyManager;
 
 public enum ServerProtocol {
     
@@ -25,7 +24,7 @@ public enum ServerProtocol {
 
     private final int versionProtocol;
 
-    private static CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
+    private static final CrazyEnvoys plugin = CrazyEnvoys.getPlugin();
 
     ServerProtocol(int versionProtocol) {
         this.versionProtocol = versionProtocol;

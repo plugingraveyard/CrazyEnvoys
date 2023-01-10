@@ -56,23 +56,23 @@ dependencies {
 
 tasks {
     shadowJar {
-        archiveFileName.set("${rootProject.name}-${rootProject.version}.jar")
+        archiveFileName.set("${rootProject.name}-${project.version}.jar")
 
         listOf(
             "de.tr7zw",
             "org.bstats",
             "org.jetbrains"
         ).forEach {
-            relocate(it, "${rootProject.group}.plugin.lib.$it")
+            relocate(it, "${project.group}.plugin.lib.$it")
         }
     }
 
     modrinth {
         token.set(System.getenv("MODRINTH_TOKEN"))
-        projectId.set("crazyenvoys")
+        projectId.set(rootProject.name.toLowerCase())
 
-        versionName.set("${rootProject.name} ${rootProject.version}")
-        versionNumber.set("${rootProject.version}")
+        versionName.set("${rootProject.name} ${project.version}")
+        versionNumber.set("${project.version}")
 
         versionType.set("alpha")
 
@@ -85,10 +85,10 @@ tasks {
 
         //<h3>The first release for CrazyCrates on Modrinth! 🎉🎉🎉🎉🎉<h3><br> If we want a header.
         changelog.set("""
-                <h2>Notice:</h2>
+                <h4>Notice:</h4>
                  <p>This is only for Legacy ( 1.8 - 1.16.5 ) Support, No new features will be added.</p>
-                <h2>Bug Fixes:</h2>
-                 <p>Fixed why it wasn't booting</p>
+                <h4>Bug Fixes:</h4>
+                 <p>Fixed why MVdWplaceholderAPI</p>
             """.trimIndent())
     }
 
@@ -96,10 +96,10 @@ tasks {
         filesMatching("plugin.yml") {
             expand(
                 "name" to rootProject.name,
-                "group" to rootProject.group,
-                "version" to rootProject.version,
-                "description" to rootProject.description,
-                "website" to "https://modrinth.com/plugin/crazyenvoys"
+                "group" to project.group,
+                "version" to project.version,
+                "description" to project.description,
+                "website" to "https://modrinth.com/plugin/${rootProject.name.toLowerCase()}"
             )
         }
     }
@@ -119,9 +119,9 @@ publishing {
 
     publications {
         create<MavenPublication>("maven") {
-            groupId = "${rootProject.group}"
+            groupId = "${project.group}"
             artifactId = rootProject.name.toLowerCase()
-            version = "${rootProject.version}"
+            version = "${project.version}"
             from(components["java"])
         }
     }

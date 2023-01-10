@@ -1,7 +1,6 @@
 package me.badbones69.crazyenvoys.multisupport;
 
 import me.badbones69.crazyenvoys.CrazyEnvoys;
-import me.badbones69.crazyenvoys.api.CrazyManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Skull;

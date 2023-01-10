@@ -14,7 +14,7 @@ A clear and concise description of what the bug is.
  - Minecraft Server Version: [e.g. 1.19]
  - Plugin Version: [e.g. 1.4.17]
 
-*Do **NOT** say Latest use `/version crazyenvoy` in the console.
+*Do **NOT** say Latest use `/version crazyenvoys` in the console.
 
 **Pastebin any errors in console**
 Link: https://mclo.gs/
